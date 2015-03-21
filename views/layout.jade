@@ -1,7 +1,13 @@
 doctype html
+head
+  title= '植物学家的女儿'
+  meta(name="viewport", content="width=device-width,initial-scale=1")
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet', href='/stylesheets/vendor/responsive-nav.css')
 html
-  head
-    title= '植物学家的女儿'
-    link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div.wrapper
+      block content
+
+    script(src='/javascripts/vendor/responsive-nav.min.js')
+    script(src='/javascripts/mobile.js')

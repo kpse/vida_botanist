@@ -1,0 +1,24 @@
+{
+  "name": "plant2",
+  "version": "0.0.0",
+  "authors": [
+    "Suo Qin <kpsesuo@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "responsive-nav": "~1.0.34"
+  },
+  "exportsOverride": {
+    "responsive-nav": {
+      "./javascript/vendor": "client/dist/*.min.js",
+      "./stylesheets/vendor": "client/dist/styles/*.css"
+    }
+  }
+}
