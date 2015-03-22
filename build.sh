@@ -9,6 +9,7 @@ function load_env {
 }
 
 function deploy_prod {
+ echo deploy to heroku ...
  git push heroku master
 }
 
@@ -17,6 +18,7 @@ function build_local {
 }
 
 function build_and_push {
+echo push to github ...
  git push origin master
 }
 
