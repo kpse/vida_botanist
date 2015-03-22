@@ -11,14 +11,32 @@
     "cookie-parser": "~1.3.4",
     "debug": "~2.1.1",
     "express": "~4.12.2",
+    "forever": "latest",
     "jade": "~1.9.2",
     "less-middleware": "1.0.x",
+    "lodash": "^3.5.0",
     "morgan": "~1.5.1",
     "pm2": "^0.12.8",
-    "serve-favicon": "~2.2.0",
-    "forever": "latest"
+    "serve-favicon": "~2.2.0"
   },
   "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-cache": "^0.2.8",
+    "gulp-coffee": "^2.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-filter": "^2.0.2",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-jshint": "^1.9.4",
+    "gulp-less": "^3.0.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.1.0",
+    "gutil": "^1.6.4",
     "nodemon": "^1.3.7"
   }
 }
