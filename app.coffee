@@ -28,7 +28,7 @@ app.use require('less-middleware')(path.join(__dirname, 'public'))
 app.use express.static(path.join(__dirname, 'public'))
 app.use express.static(path.join(__dirname, 'dist'))
 
-app.use session({ secret: 'keyboard cat', resave: false, saveUninitialized: false })
+app.use session({secret: 'keyboard cat', resave: false, saveUninitialized: false})
 app.use flash()
 app.use passport.initialize()
 app.use passport.session()
@@ -63,11 +63,10 @@ app.use (err, req, res, next) ->
     error: {}
 
 
-
 mongoose = require("mongoose");
 cors = require("cors");
-
-mongoose.connect 'mongodb://localhost/simple'
+dbpath =  process.env['MONGOLAB_URI'] || 'mongodb://localhost/simple'
+mongoose.connect dbpath
 personSchema =
   username: String
   password: String
@@ -82,10 +81,10 @@ user = new User
 user.save()
 
 passport.use new LocalStrategy((username, password, done) ->
-  User.findOne { username: username }, (err, user) ->
+  User.findOne {username: username}, (err, user) ->
     return done(err) if err
-    return done(null, false, { message: 'Incorrect username.' }) unless user
-    return done(null, false, { message: 'Incorrect password.' }) unless user.password == password
+    return done(null, false, {message: 'Incorrect username.'}) unless user
+    return done(null, false, {message: 'Incorrect password.'}) unless user.password == password
     done null, user
 )
 

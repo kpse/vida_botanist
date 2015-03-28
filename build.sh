@@ -6,6 +6,7 @@ function js_dependency {
 
 function load_env {
  echo load_env
+ MONGOLAB_URI=mongodb://localhost/simple
 }
 
 function deploy_prod {
