@@ -19,6 +19,9 @@
     "responsive-nav": {
       "./javascript/vendor": "client/dist/*.min.js",
       "./stylesheets/vendor": "client/dist/styles/*.css"
+    },
+    "jquery": {
+      "./javascript/vendor": "dist/*.min.js"
     }
   }
 }
