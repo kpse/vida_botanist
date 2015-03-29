@@ -2,19 +2,19 @@ extends layout
 
 block content
   form( method="post")#login-form.well.span4
-    h1 Hello!
-    p.subheading Please Login To Your Account
-    label Username
+    h1 登陆
+    p.subheading 请使用注册的手机号登陆
+    label 手机号码
     input(type="text", name="username", id='username').span4.required
-    label Password
+    label 密码
     input(type="password", name="password", id='password').span4.required
     button(type="submit")#btn-login.btn.btn-primary
       i.icon-lock.icon-white
-      | Sign in
+      | 登陆
     label#remember-me.checkbox Remember Me
       input(type="checkbox", checked='checked')
     div.clear-fix
     hr
     div.btm-links
       a(href='#')#forgot-password Forgot Your Password?
-      a(href='/signup')#create-account Create An Account
+      a(href='/signup')#create-account 免费注册

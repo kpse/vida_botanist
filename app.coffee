@@ -63,30 +63,10 @@ app.use (err, req, res, next) ->
     error: {}
 
 
-mongoose = require("mongoose");
-cors = require("cors");
-dbpath =  process.env['MONGOLAB_URI'] || 'mongodb://localhost/simple'
-mongoose.connect dbpath
-personSchema =
-  username: String
-  password: String
-  email: String
-  cellphone: String
-User = mongoose.model('User', personSchema, 'users')
-user = new User
-  username: 'suoqin'
-  password: '12345'
-  email: 'abc@a.com'
-  cellphone: '1234567891'
-user.save()
+user = require("./src/model/user")
+db = require('./db')
 
-passport.use new LocalStrategy((username, password, done) ->
-  User.findOne {username: username}, (err, user) ->
-    return done(err) if err
-    return done(null, false, {message: 'Incorrect username.'}) unless user
-    return done(null, false, {message: 'Incorrect password.'}) unless user.password == password
-    done null, user
-)
+passport.use new LocalStrategy(user.passport)
 
 passport.serializeUser (user, done) ->
   done null, user
