@@ -11,6 +11,7 @@ var gulp = require('gulp'),
   notify = require('gulp-notify'),
   coffee = require('gulp-coffee'),
   gutil = require('gutil'),
+  browserify = require('gulp-browserify');
   del = require('del');
 
 gulp.task('styles', function () {
@@ -27,17 +28,21 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('public/javascripts/**/*')
-    .pipe(gulpif(/[.]coffee$/, coffee({bare: true}).on('error', gutil.log)))
+  return gulp.src('public/javascripts/**/*', { read: false })
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(concat('main.js'))
+    .pipe(browserify({
+      transform: ['coffeeify'],
+      extensions: ['.coffee']
+    }))
+    .pipe(concat('main.js', {newLine: ';'}))
     .pipe(gulp.dest('dist/assets/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist/assets/js'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
+
 
 gulp.task('clean', function(cb) {
   del(['dist/assets/css', 'dist/assets/js'], cb)
