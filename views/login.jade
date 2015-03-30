@@ -7,10 +7,12 @@ block content
       p.subheading 请使用注册的手机号登陆
       .form-group
         label 手机号码
-        input(type="text", name="username", id='username', placeholder='请输入11位手机号码').required.form-control
+        input(type="text", name="username", id='username', placeholder='请输入11位手机号码', class='login-field username').required.form-control
+        p.help-block.error-message.error-phone-required 请输入11位手机号码.
       .form-group
         label 密码
-        input(type="password", name="password", id='password', placeholder='输入密码').required.form-control
+        input(type="password", name="password", id='password', placeholder='输入密码', class='login-field password').required.form-control
+        p.help-block.error-message.error-password-length 密码至少6位长.
       button(type="submit")#btn-login.btn.btn-primary
         i.icon-lock.icon-white
         | 登陆

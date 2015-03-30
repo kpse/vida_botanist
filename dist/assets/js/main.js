@@ -22660,6 +22660,8 @@ $ = require('jquery');
 
 $('#btn-signup').prop('disabled', true);
 
+$('#btn-login').prop('disabled', true);
+
 md5 = function(text) {
   return crypto.createHash('md5').update(text).digest("hex");
 };
@@ -22680,12 +22682,12 @@ passwordRepeatIsEmpty = function() {
   return $('#password-repeat').val().length === 0;
 };
 
-hasUsername = function() {
-  return $('#username').val().length > 0;
-};
-
 hasFullname = function() {
   return $('#fullname').val().length > 0;
+};
+
+hasUsername = function() {
+  return $('.username').val().length === 11;
 };
 
 signupSubmit = function() {
@@ -22704,7 +22706,7 @@ $('#btn-login').click(_.flow(encryptPassword, loginSubmit));
 
 $('#btn-signup').click(_.flow(passwordIsTheSame, encryptPassword, signupSubmit));
 
-$('#password, #password-repeat').change(function(e) {
+$('.signup-field.password-repeat, .signup-field.password').change(function(e) {
   if (passwordIsTheSame()) {
     return $('.error-password-match').hide();
   } else if (!passwordRepeatIsEmpty()) {
@@ -22712,7 +22714,7 @@ $('#password, #password-repeat').change(function(e) {
   }
 });
 
-$('#password, #password-repeat').bind('input', function(e) {
+$('.signup-field.password-repeat, .signup-field.password').bind('input', function(e) {
   if (passwordIsLongerEnough() && passwordIsTheSame() && hasUsername() && hasFullname()) {
     return $('#btn-signup').prop('disabled', false);
   } else {
@@ -22720,7 +22722,7 @@ $('#password, #password-repeat').bind('input', function(e) {
   }
 });
 
-$('#password').change(function(e) {
+$('.password').change(function(e) {
   if (passwordIsLongerEnough()) {
     return $('.error-password-length').hide();
   } else {
@@ -22728,7 +22730,7 @@ $('#password').change(function(e) {
   }
 });
 
-$('#username').change(function(e) {
+$('.username').bind('input', function(e) {
   if (hasUsername()) {
     return $('.error-phone-required').hide();
   } else {
@@ -22736,11 +22738,19 @@ $('#username').change(function(e) {
   }
 });
 
-$('#fullname').change(function(e) {
+$('.signup-field.fullname').change(function(e) {
   if (hasFullname()) {
     return $('.error-name-required').hide();
   } else {
     return $('.error-name-required').show();
+  }
+});
+
+$('.login-field.username, .login-field.password').bind('input', function(e) {
+  if (passwordIsLongerEnough() && hasUsername()) {
+    return $('#btn-login').prop('disabled', false);
+  } else {
+    return $('#btn-login').prop('disabled', true);
   }
 });
 

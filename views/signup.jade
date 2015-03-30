@@ -7,7 +7,7 @@ block content
       p.subheading 注册 (<span class="red-star">*</span>)为必填项
       .form-group
         label 姓名<span class="red-star">*</span>
-        input(type="text", name="fullname", id='fullname', placeholder='怎么称呼您呢?').form-control.required
+        input(type="text", name="fullname", id='fullname', placeholder='怎么称呼您呢?', class='signup-field fullname').form-control.required
         p.help-block.error-message.error-name-required 请输入姓名.
       .form-group
         label 称谓
@@ -17,15 +17,15 @@ block content
           option(value="小姐") 小姐
       .form-group
         label 手机号<span class="red-star">*</span>
-        input(type="text", name="username", id='username', placeholder='将使用手机号作为用户名登陆').form-control.required
-        p.help-block.error-message.error-phone-required 请输入手机号.
+        input(type="text", name="username", id='username', placeholder='将使用手机号作为用户名登陆', class='signup-field username').form-control.required
+        p.help-block.error-message.error-phone-required 请输入11位手机号.
       .form-group
         label 密码<span class="red-star">*</span>
-        input(type="password", name="password", id='password', placeholder='密码至少6位长').form-control.required
+        input(type="password", name="password", id='password', placeholder='密码至少6位长', class='signup-field password').form-control.required
         p.help-block.error-message.error-password-length 密码至少6位长.
       .form-group
         label 重复密码<span class="red-star">*</span>
-        input(type="password", name="password-repeat", id='password-repeat', placeholder='重复密码').form-control.required
+        input(type="password", name="password-repeat", id='password-repeat', placeholder='重复密码', class='signup-field password-repeat').form-control.required
         p.help-block.error-message.error-password-match 两次密码不相同.
 
       button(type="submit")#btn-signup.btn.btn-primary
