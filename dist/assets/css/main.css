@@ -27,6 +27,7 @@ nav {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-style: normal;
+  text-decoration: none;
 }
 .ad {
   margin: 5px auto 0;
@@ -42,6 +43,12 @@ nav {
 .error-message {
   display: none;
   color: red;
+}
+.red-star {
+  color: red;
+}
+.form-control {
+  max-width: 300px;
 }
 @media screen and (max-width: 780px) {
   .logo {
