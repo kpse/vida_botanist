@@ -39,6 +39,10 @@ nav {
 .clearfix {
   clear: both;
 }
+.error-message {
+  display: none;
+  color: red;
+}
 @media screen and (max-width: 780px) {
   .logo {
     display: none;

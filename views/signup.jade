@@ -6,6 +6,7 @@ block content
     p.subheading 注册
     label 姓名
     input(type="text", name="fullname", id='fullname').span12.required
+    span.error-message.error-name-required 请输入姓名.
     label 称谓
     select(name="suffix", id='suffix').span12.required
         option(value="小姐") 小姐
@@ -13,10 +14,13 @@ block content
         option(value="先生") 先生
     label 手机号
     input(type="text", name="username", id='username').span12.required
+    span.error-message.error-phone-required 请输入手机号.
     label 密码
     input(type="password", name="password", id='password').span12.required
+    span.error-message.error-password-length 密码至少6位长.
     label 重复密码
     input(type="password", name="password-repeat", id='password-repeat').span12.required
+    span.error-message.error-password-match 两次密码不相同.
 
     button(type="submit")#btn-signup.btn.btn-primary
       i.icon-lock.icon-white

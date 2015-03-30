@@ -22650,7 +22650,7 @@ return jQuery;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],12:[function(require,module,exports){
-var $, _, crypto, encryptPassword, loginSubmit, md5, signupSubmit;
+var $, _, crypto, encryptPassword, hasFullname, hasUsername, loginSubmit, md5, passwordIsLongerEnough, passwordIsTheSame, passwordRepeatIsEmpty, signupSubmit;
 
 _ = require('lodash');
 
@@ -22658,13 +22658,34 @@ crypto = require('crypto');
 
 $ = require('jquery');
 
+$('#btn-signup').prop('disabled', true);
+
 md5 = function(text) {
   return crypto.createHash('md5').update(text).digest("hex");
 };
 
 encryptPassword = function(e) {
-  $('#password').val(md5($('#password').val()));
-  return console.log(password);
+  return $('#password').val(md5($('#password').val()));
+};
+
+passwordIsTheSame = function() {
+  return $('#password-repeat').val() === $('#password').val();
+};
+
+passwordIsLongerEnough = function() {
+  return $('#password').val().length >= 6;
+};
+
+passwordRepeatIsEmpty = function() {
+  return $('#password-repeat').val().length === 0;
+};
+
+hasUsername = function() {
+  return $('#username').val().length > 0;
+};
+
+hasFullname = function() {
+  return $('#fullname').val().length > 0;
 };
 
 signupSubmit = function() {
@@ -22673,13 +22694,55 @@ signupSubmit = function() {
 };
 
 loginSubmit = function() {
-  $('#login-form').submit();
+  if (passwordIsLongerEnough()) {
+    $('#login-form').submit();
+  }
   return false;
 };
 
 $('#btn-login').click(_.flow(encryptPassword, loginSubmit));
 
-$('#btn-signup').click(_.flow(encryptPassword, signupSubmit));
+$('#btn-signup').click(_.flow(passwordIsTheSame, encryptPassword, signupSubmit));
+
+$('#password, #password-repeat').change(function(e) {
+  if (passwordIsTheSame()) {
+    return $('.error-password-match').hide();
+  } else if (!passwordRepeatIsEmpty()) {
+    return $('.error-password-match').show();
+  }
+});
+
+$('#password, #password-repeat').bind('input', function(e) {
+  if (passwordIsLongerEnough() && passwordIsTheSame() && hasUsername() && hasFullname()) {
+    return $('#btn-signup').prop('disabled', false);
+  } else {
+    return $('#btn-signup').prop('disabled', true);
+  }
+});
+
+$('#password').change(function(e) {
+  if (passwordIsLongerEnough()) {
+    return $('.error-password-length').hide();
+  } else {
+    return $('.error-password-length').show();
+  }
+});
+
+$('#username').change(function(e) {
+  if (hasUsername()) {
+    return $('.error-phone-required').hide();
+  } else {
+    return $('.error-phone-required').show();
+  }
+});
+
+$('#fullname').change(function(e) {
+  if (hasFullname()) {
+    return $('.error-name-required').hide();
+  } else {
+    return $('.error-name-required').show();
+  }
+});
 
 
 
