@@ -10,12 +10,18 @@ var gulp = require('gulp'),
   rename = require('gulp-rename'),
   notify = require('gulp-notify'),
   coffee = require('gulp-coffee'),
-  gutil = require('gutil'),
-  browserify = require('gulp-browserify');
+  browserify = require('gulp-browserify'),
   del = require('del');
 
+var paths = {
+  scripts: ['./public/javascripts/**/*'],
+  styles: ['./public/stylesheets/**/*.less'],
+  templates: ['./views/**/*.jade']
+};
+
+
 gulp.task('styles', function () {
-  return gulp.src('./public/stylesheets/**/*.less')
+  return gulp.src(paths.styles)
     .pipe(less({
       paths: [path.join(__dirname, 'less', 'includes')]
     }))
@@ -28,7 +34,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('public/javascripts/**/*', { read: false })
+  return gulp.src(paths.scripts, { read: false })
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(browserify({
@@ -50,4 +56,10 @@ gulp.task('clean', function(cb) {
 
 gulp.task('default', ['clean'], function() {
   gulp.start('styles', 'scripts');
+});
+
+
+gulp.task('watch', ['default'], function() {
+  gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(paths.styles, ['styles']);
 });
