@@ -1,13 +1,13 @@
 passport = require('passport')
 express = require('express')
-UserModel = require('../src/model/user')
+UserModel = require('../model/user')
 router = express.Router()
 User = UserModel.User
 
 ### GET home page. ###
 
 router.get '/', (req, res, next) ->
-  res.render 'index', title: 'Express'
+  res.render 'index', {title: 'Express', user: req.user}
 
 router.get '/signup', (req, res, next) ->
   res.render 'signup', title: 'Sign up'

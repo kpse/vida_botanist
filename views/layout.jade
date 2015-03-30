@@ -40,8 +40,12 @@ html
             a(href='#') 家 居
           li.action-item
             a(href='#') 植物学家爸比
-          li.action-item
-            a(href='/login') 会 员/注 册
+          if user
+            li.action-item
+              a(href='/login') 欢迎你:#{user.suffix} #{user.fullname}
+          else
+            li.action-item
+              a(href='/login') 会 员/注 册
       div.clearfix
       div.logo.mobile
         img(class='thumb-image' src='/images/hero_plant.jpg')

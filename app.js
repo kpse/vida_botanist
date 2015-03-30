@@ -16,13 +16,13 @@
 
   flash = require('connect-flash');
 
-  routes = require('./routes/index');
+  routes = require('./src/routes/index');
 
-  users = require('./routes/users');
+  users = require('./src/routes/users');
 
-  flowers = require('./routes/flowers');
+  flowers = require('./src/routes/flowers');
 
-  auth = require('./routes/auth');
+  auth = require('./src/routes/auth');
 
   passport = require('passport');
 

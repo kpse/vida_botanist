@@ -10,13 +10,16 @@ var gulp = require('gulp'),
   rename = require('gulp-rename'),
   notify = require('gulp-notify'),
   coffee = require('gulp-coffee'),
+  gutil = require('gutil'),
   browserify = require('gulp-browserify'),
   del = require('del');
 
 var paths = {
   scripts: ['./public/javascripts/**/*'],
   styles: ['./public/stylesheets/**/*.less'],
-  templates: ['./views/**/*.jade']
+  templates: ['./views/**/*.jade'],
+  node: ['./src/**/*.coffee']
+
 };
 
 
@@ -49,6 +52,12 @@ gulp.task('scripts', function() {
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
+gulp.task('coffee', function() {
+  gulp.src(paths.node)
+    .pipe(coffee({bare: true}).on('error', gutil.log))
+    .pipe(gulp.dest('./src/'))
+    .pipe(notify({ message: 'Coffee task complete' }));
+});
 
 gulp.task('clean', function(cb) {
   del(['dist/assets/css', 'dist/assets/js'], cb)
@@ -62,4 +71,5 @@ gulp.task('default', ['clean'], function() {
 gulp.task('watch', ['default'], function() {
   gulp.watch(paths.scripts, ['scripts']);
   gulp.watch(paths.styles, ['styles']);
+  gulp.watch(paths.node, ['coffee']);
 });
